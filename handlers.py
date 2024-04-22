@@ -29,7 +29,7 @@ async def return_to_main_menu(clbk: CallbackQuery):
         content += f"{counter} - {i}\n"
         counter += 1
     await clbk.message.delete()
-    await clbk.message.answer("Добро пожаловать в корневую директорию! Доступный контент:\n\n" + content + "\n\nДля выбора файла/дирректории отправильте номер эллемента в чат. Отправить необъодимо только номер, без знаком препинаяи и т.д.",
+    await clbk.message.answer("Добро пожаловать в корневую директорию! Доступный контент:\n\n" + content + "\n\nДля выбора файла/директории отправьте номер эллемента в чат. Отправить необходимо только номер, без знаком препинания и т.д.",
                               reply_markup=keyboards.menu)
 
 
@@ -43,7 +43,7 @@ async def return_to_prev(clbk: CallbackQuery):
         content += f"{counter} - {i}\n"
         counter += 1
     await clbk.message.delete()
-    await clbk.message.answer("Вы успешно вернулись в корневую дирректорию.\nДостуаный контент:\n\n" + content + "\n\nДля выбора файла/дирректории отправильте номер эллемента в чат. Отправить необъодимо только номер, без знаком препинаяи и т.д.",
+    await clbk.message.answer("Вы успешно вернулись в корневую директорию.\nДостуаный контент:\n\n" + content + "\n\nДля выбора файла/директории отправьте номер эллемента в чат. Отправить необходимо только номер, без знаком препинания и т.д.",
                               reply_markup=keyboards.menu)
 
 
@@ -54,13 +54,13 @@ async def open_file_dir(msg: Message):
     try:
         index = int(msg.text) - 1
     except TypeError:
-        await msg.answer("Некоректно введён индекс", reply_markup=keyboards.first)
+        await msg.answer("Некорректно введён индекс", reply_markup=keyboards.first)
     data = ex.get_dir_content()
     target = ""
     try:
         target = data[index]
     except IndexError:
-        await msg.answer("Некоректно введён индекс", reply_markup=keyboards.first)
+        await msg.answer("Некорректно введён индекс", reply_markup=keyboards.first)
 
     if os.path.isfile(os.path.join(os.getcwd(), target)):
         await msg.answer("Ваш файл:",reply_markup=keyboards.menu)
